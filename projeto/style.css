@@ -1,0 +1,652 @@
+
+/* =========================================
+   PIZZARIA FORNO DE OURO
+   CSS3 — Flexbox, Grid, menus e responsividade
+   ========================================= */
+
+/* 1. VARIÁVEIS GLOBAIS */
+:root {
+    --cor-primaria: #b83227;
+    --cor-primaria-escura: #7f1d1d;
+    --cor-destaque: #f4a62a;
+    --cor-fundo: #fff8ef;
+    --cor-card: #ffffff;
+    --cor-texto: #30251f;
+    --cor-texto-claro: #6b5b52;
+    --cor-borda: #ead9c8;
+    --sombra: 0 5px 18px rgba(48, 37, 31, 0.10);
+    --raio-card: 14px;
+    --transicao-padrao: 0.25s ease;
+}
+
+/* 2. RESET E CONFIGURAÇÕES GERAIS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-areas:
+        "cabecalho"
+        "conteudo"
+        "rodape";
+    grid-template-rows: auto 1fr auto;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    color: var(--cor-texto);
+    background-color: var(--cor-fundo);
+}
+
+img,
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    color: var(--cor-primaria);
+    transition: color var(--transicao-padrao);
+}
+
+a:hover {
+    color: var(--cor-primaria-escura);
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* Acessibilidade: foco visível ao navegar pelo teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--cor-destaque);
+    outline-offset: 4px;
+}
+
+/* 3. CABEÇALHO */
+header {
+    grid-area: cabecalho;
+    background-color: var(--cor-primaria-escura);
+    color: #ffffff;
+    padding: 22px 5%;
+    text-align: center;
+}
+
+header h1 {
+    color: var(--cor-destaque);
+    font-size: clamp(1.8rem, 4vw, 2.7rem);
+    line-height: 1.2;
+    margin-bottom: 8px;
+}
+
+header p {
+    color: #fff8ef;
+}
+
+/* 4. MENU DE NAVEGAÇÃO COM FLEXBOX */
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 14px 5%;
+    background-color: var(--cor-card);
+    box-shadow: var(--sombra);
+}
+
+nav .logo,
+nav > a {
+    color: var(--cor-primaria-escura);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 22px;
+    list-style: none;
+}
+
+nav li {
+    position: relative;
+}
+
+nav li a {
+    display: block;
+    padding: 8px 2px;
+    color: var(--cor-texto);
+    font-weight: bold;
+    text-decoration: none;
+    transition:
+        color var(--transicao-padrao),
+        background-color var(--transicao-padrao);
+}
+
+nav li a:hover,
+nav li a:focus-visible {
+    color: var(--cor-primaria);
+}
+
+/* Estado ativo do menu */
+nav li a.ativo,
+nav li a[aria-current="page"] {
+    color: var(--cor-primaria);
+    border-bottom: 2px solid var(--cor-primaria);
+}
+
+/* 5. DROPDOWN — SUBMENU OPCIONAL */
+.tem-dropdown {
+    position: relative;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 110;
+    min-width: 190px;
+    padding: 8px;
+    background-color: var(--cor-card);
+    border: 1px solid var(--cor-borda);
+    border-radius: 10px;
+    box-shadow: var(--sombra);
+}
+
+/* Abre com o mouse ou com foco pelo teclado */
+.tem-dropdown:hover .dropdown,
+.tem-dropdown:focus-within .dropdown {
+    display: block;
+}
+
+.dropdown li a {
+    padding: 10px 12px;
+    border-radius: 6px;
+}
+
+.dropdown li a:hover {
+    background-color: var(--cor-fundo);
+}
+
+/* 6. CONTEÚDO PRINCIPAL */
+main {
+    grid-area: conteudo;
+    width: min(1200px, 90%);
+    margin: 0 auto;
+    padding: 32px 0;
+}
+
+section {
+    margin-bottom: 44px;
+    scroll-margin-top: 100px;
+}
+
+section h2,
+main > h2 {
+    margin-bottom: 18px;
+    color: var(--cor-primaria-escura);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+section p {
+    margin-bottom: 12px;
+}
+
+section h3 {
+    color: var(--cor-primaria-escura);
+    margin-bottom: 8px;
+}
+
+/* 7. ÁREA DE DESTAQUE / APRESENTAÇÃO */
+#inicio,
+.inicio,
+.destaque {
+    padding: clamp(24px, 5vw, 48px);
+    background: linear-gradient(135deg, #fff0d8, #ffffff);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-card);
+    box-shadow: var(--sombra);
+}
+
+#inicio h2,
+.inicio h2,
+.destaque h2 {
+    color: var(--cor-primaria);
+}
+
+/* 8. CARDÁPIO COM CSS GRID RESPONSIVO */
+#cardapio,
+.cardapio {
+    width: 100%;
+}
+
+#cardapio > div,
+.grade-pizzas,
+.lista-pizzas,
+.grade-cardapio {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: 24px;
+}
+
+/* Cards de produtos: funciona com article dentro do cardápio */
+#cardapio article,
+.cardapio article,
+.card-pizza,
+.card-produto {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    min-width: 0;
+    padding: 20px;
+    overflow-wrap: anywhere;
+    background-color: var(--cor-card);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-card);
+    box-shadow: var(--sombra);
+    transition:
+        transform var(--transicao-padrao),
+        box-shadow var(--transicao-padrao);
+}
+
+/* Efeito visual sem alterar a geometria do layout */
+#cardapio article:hover,
+.cardapio article:hover,
+.card-pizza:hover,
+.card-produto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 24px rgba(48, 37, 31, 0.16);
+}
+
+#cardapio article img,
+.cardapio article img,
+.card-pizza img,
+.card-produto img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+#cardapio article h3,
+.cardapio article h3,
+.card-pizza h3,
+.card-produto h3 {
+    font-size: 1.2rem;
+    color: var(--cor-primaria-escura);
+}
+
+#cardapio article p,
+.cardapio article p,
+.card-pizza p,
+.card-produto p {
+    color: var(--cor-texto-claro);
+}
+
+.preco,
+.preco-pizza,
+.card-pizza strong {
+    color: var(--cor-primaria);
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+/* 9. BOTÕES */
+button,
+.botao,
+.btn,
+a.botao {
+    display: inline-block;
+    padding: 11px 18px;
+    color: #ffffff;
+    background-color: var(--cor-primaria);
+    border: 2px solid var(--cor-primaria);
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    transition:
+        background-color var(--transicao-padrao),
+        border-color var(--transicao-padrao),
+        transform var(--transicao-padrao);
+}
+
+button:hover,
+.botao:hover,
+.btn:hover,
+a.botao:hover {
+    color: #ffffff;
+    background-color: var(--cor-primaria-escura);
+    border-color: var(--cor-primaria-escura);
+}
+
+button:active,
+.botao:active,
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* 10. PROMOÇÕES */
+#promocoes,
+.promocoes {
+    padding: 24px;
+    background-color: #fff0d8;
+    border-left: 5px solid var(--cor-destaque);
+    border-radius: 10px;
+}
+
+#promocoes article,
+.promocoes article {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+#promocoes article:last-child,
+.promocoes article:last-child {
+    border-bottom: none;
+}
+
+/* 11. FORMULÁRIO DE PEDIDOS */
+form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    padding: clamp(18px, 4vw, 30px);
+    background-color: var(--cor-card);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-card);
+    box-shadow: var(--sombra);
+}
+
+fieldset {
+    min-width: 0;
+    padding: 18px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 10px;
+}
+
+legend {
+    padding: 0 8px;
+    color: var(--cor-primaria-escura);
+    font-weight: bold;
+}
+
+form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+form input:not([type="radio"]):not([type="checkbox"]),
+form select,
+form textarea {
+    width: 100%;
+    min-width: 0;
+    padding: 12px;
+    color: var(--cor-texto);
+    background-color: #ffffff;
+    border: 1px solid #cbb9a8;
+    border-radius: 7px;
+    transition:
+        border-color var(--transicao-padrao),
+        box-shadow var(--transicao-padrao);
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 3px rgba(184, 50, 39, 0.12);
+    outline: none;
+}
+
+form input:invalid:not(:placeholder-shown) {
+    border-color: #b42318;
+}
+
+form input[type="radio"],
+form input[type="checkbox"] {
+    margin-right: 7px;
+    accent-color: var(--cor-primaria);
+}
+
+form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+form button,
+form input[type="submit"],
+form .botao-enviar {
+    justify-self: start;
+    width: fit-content;
+}
+
+form fieldset,
+form .campo-completo,
+form > button,
+form > input[type="submit"] {
+    grid-column: 1 / -1;
+}
+
+form small {
+    display: block;
+    margin-top: 5px;
+    color: var(--cor-texto-claro);
+}
+
+/* 12. CONTEÚDO MULTIMÍDIA */
+video,
+audio {
+    display: block;
+    width: 100%;
+    max-width: 760px;
+    margin: 18px auto;
+    border-radius: 10px;
+}
+
+video {
+    background-color: #211b18;
+    box-shadow: var(--sombra);
+}
+
+audio {
+    max-width: 500px;
+}
+
+figure {
+    margin: 20px 0;
+    text-align: center;
+}
+
+figcaption {
+    margin-top: 8px;
+    color: var(--cor-texto-claro);
+    font-size: 0.9rem;
+}
+
+/* 13. SVG E CANVAS */
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 16px auto;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    margin: 20px auto;
+    background-color: #ffffff;
+    border: 1px solid var(--cor-borda);
+    border-radius: 10px;
+}
+
+/* 14. BARRA LATERAL / INFORMAÇÕES */
+aside {
+    margin: 24px 0;
+    padding: 22px;
+    background-color: #fff0d8;
+    border-radius: var(--raio-card);
+}
+
+aside h2,
+aside h3 {
+    color: var(--cor-primaria-escura);
+}
+
+/* 15. RODAPÉ */
+footer {
+    grid-area: rodape;
+    padding: 28px 5%;
+    color: #ffffff;
+    background-color: var(--cor-primaria-escura);
+    text-align: center;
+}
+
+footer p {
+    margin: 6px 0;
+}
+
+footer a {
+    color: #ffcf70;
+}
+
+footer a:hover {
+    color: #ffffff;
+}
+
+/* 16. MENU HAMBÚRGUER — ESTRUTURA VISUAL */
+.menu-hamburguer {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    padding: 8px;
+    background: transparent;
+    border: none;
+}
+
+.menu-hamburguer .barra {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--cor-primaria-escura);
+    border-radius: 2px;
+}
+
+/* 17. RESPONSIVIDADE PARA TABLETS E CELULARES */
+@media (max-width: 768px) {
+    nav {
+        justify-content: center;
+    }
+
+    nav ul {
+        justify-content: center;
+        gap: 12px 18px;
+    }
+
+    main {
+        width: 92%;
+        padding-top: 24px;
+    }
+
+    form {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    form fieldset,
+    form .campo-completo,
+    form > button,
+    form > input[type="submit"] {
+        grid-column: 1;
+    }
+}
+
+@media (max-width: 640px) {
+    nav {
+        justify-content: space-between;
+    }
+
+    /* O botão só aparece se existir no HTML.
+       Abrir e fechar o menu exige JavaScript. */
+    .menu-hamburguer {
+        display: flex;
+    }
+
+    nav ul {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+    }
+
+    nav li a {
+        padding: 10px;
+        text-align: center;
+    }
+
+    .dropdown {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+    }
+
+    #inicio,
+    .inicio,
+    .destaque {
+        padding: 22px;
+    }
+
+    section {
+        margin-bottom: 32px;
+    }
+
+    #promocoes,
+    .promocoes {
+        padding: 18px;
+    }
+}
+
+/* 18. REDUÇÃO DE MOVIMENTO */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

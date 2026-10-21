@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conheça o cardápio da Pizzaria Forno de Ouro e faça seu pedido.">
+    <title>Pizzaria Forno de Ouro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+    <header>
+        <h1>Pizzaria Forno de Ouro</h1>
+        <p>O sabor que transforma cada momento!</p>
+
+        <!-- Logotipo em SVG -->
+        <svg viewBox="0 0 120 120" width="120" height="120"
+             role="img" aria-labelledby="titulo-logo">
+            <title id="titulo-logo">Logotipo da Pizzaria Forno de Ouro</title>
+            <circle cx="60" cy="60" r="55" fill="#B22222"/>
+            <circle cx="60" cy="60" r="43" fill="#F5C16C"/>
+            <path d="M60 22 L91 85 L29 85 Z" fill="#E89B35"/>
+            <circle cx="55" cy="53" r="5" fill="#B22222"/>
+            <circle cx="68" cy="68" r="5" fill="#B22222"/>
+            <circle cx="48" cy="73" r="4" fill="#B22222"/>
+        </svg>
+
+        <nav aria-label="Navegação principal">
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#cardapio">Cardápio</a></li>
+                <li><a href="#promocoes">Promoções</a></li>
+                <li><a href="#pedido">Fazer pedido</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL: APENAS UM MAIN -->
+    <main>
+
+        <!-- INÍCIO -->
+        <section id="inicio">
+            <h2>Bem-vindo à nossa pizzaria!</h2>
+
+            <p>
+                Trabalhamos com ingredientes selecionados,
+                massas saborosas e muito carinho em cada pizza.
+            </p>
+
+            <p>
+                Escolha seu sabor favorito e faça seu pedido!
+            </p>
+
+            <a href="#cardapio">Conheça nosso cardápio</a>
+        </section>
+
+        <!-- CARDÁPIO -->
+        <section id="cardapio">
+            <h2>Nosso cardápio</h2>
+
+            <p>Confira algumas das nossas pizzas mais pedidas.</p>
+
+            <article>
+                <h3>Pizza de Calabresa</h3>
+                <p>Molho de tomate, mussarela, calabresa e cebola.</p>
+                <p>Preço: R$ 35,00</p>
+            </article>
+
+            <article>
+                <h3>Pizza de Mussarela</h3>
+                <p>Molho de tomate, mussarela, tomate e orégano.</p>
+                <p>Preço: R$ 32,00</p>
+            </article>
+
+            <article>
+                <h3>Pizza Portuguesa</h3>
+                <p>Presunto, mussarela, ovo, cebola, tomate e azeitona.</p>
+                <p>Preço: R$ 40,00</p>
+            </article>
+
+            <article>
+                <h3>Pizza de Frango com Catupiry</h3>
+                <p>Frango desfiado, mussarela e requeijão cremoso.</p>
+                <p>Preço: R$ 42,00</p>
+            </article>
+        </section>
+
+        <!-- PROMOÇÕES -->
+        <section id="promocoes">
+            <h2>Promoções da casa</h2>
+
+            <article>
+                <h3>Combo Família</h3>
+                <p>Uma pizza grande e um refrigerante de 2 litros.</p>
+                <p>Preço promocional: R$ 55,00</p>
+            </article>
+
+            <article>
+                <h3>Quarta-feira da Pizza</h3>
+                <p>Consulte nossos sabores participantes e aproveite!</p>
+            </article>
+        </section>
+
+        <!-- FORMULÁRIO DE PEDIDO -->
+        <section id="pedido">
+            <h2>Faça seu pedido</h2>
+
+            <p>Preencha os dados abaixo para montar seu pedido.</p>
+
+            <form action="#" method="get">
+
+                <fieldset>
+                    <legend>Dados do cliente</legend>
+
+                    <label for="nome">Nome completo:</label>
+                    <input type="text" id="nome" name="nome"
+                           minlength="3" maxlength="80"
+                           autocomplete="name" required>
+
+                    <label for="telefone">Telefone:</label>
+                    <input type="tel" id="telefone" name="telefone"
+                           placeholder="(83) 99999-9999"
+                           pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}"
+                           autocomplete="tel" required>
+
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email"
+                           autocomplete="email" required>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Detalhes do pedido</legend>
+
+                    <label for="sabor">Escolha o sabor:</label>
+                    <select id="sabor" name="sabor" required>
+                        <option value="">Selecione um sabor</option>
+                        <option value="calabresa">Calabresa</option>
+                        <option value="mussarela">Mussarela</option>
+                        <option value="portuguesa">Portuguesa</option>
+                        <option value="frango-catupiry">Frango com Catupiry</option>
+                    </select>
+
+                    <label for="tamanho">Tamanho da pizza:</label>
+                    <select id="tamanho" name="tamanho" required>
+                        <option value="">Selecione o tamanho</option>
+                        <option value="pequena">Pequena</option>
+                        <option value="media">Média</option>
+                        <option value="grande">Grande</option>
+                    </select>
+
+                    <label for="quantidade">Quantidade:</label>
+                    <input type="number" id="quantidade"
+                           name="quantidade" min="1" max="20"
+                           value="1" required>
+
+                    <p>Como deseja receber seu pedido?</p>
+
+                    <input type="radio" id="entrega" name="recebimento"
+                           value="entrega" required>
+                    <label for="entrega">Entrega em casa</label>
+
+                    <input type="radio" id="retirada" name="recebimento"
+                           value="retirada">
+                    <label for="retirada">Retirada no local</label>
+
+                    <label for="endereco">Endereço de entrega:</label>
+                    <input type="text" id="endereco" name="endereco"
+                           autocomplete="street-address">
+
+                    <label for="observacoes">Observações do pedido:</label>
+                    <textarea id="observacoes" name="observacoes"
+                              rows="4" maxlength="300"
+                              placeholder="Ex.: retirar cebola, cortar em oito fatias..."></textarea>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Confirmação</legend>
+
+                    <input type="checkbox" id="termos" name="termos"
+                           value="aceito" required>
+                    <label for="termos">
+                        Confirmo que os dados do pedido estão corretos.
+                    </label>
+                </fieldset>
+
+                <button type="submit">Enviar pedido</button>
+                <button type="reset">Limpar formulário</button>
+
+            </form>
+        </section>
+
+        <!-- CONTEÚDO RELACIONADO -->
+        <aside>
+            <h2>Dica do pizzaiolo</h2>
+            <p>Experimente nossa pizza de calabresa com orégano!</p>
+        </aside>
+
+        <!-- MULTIMÍDIA -->
+        <section id="multimidia">
+            <h2>Conheça nossa pizzaria</h2>
+
+            <h3>Vídeo de apresentação</h3>
+
+            <video controls width="480" preload="metadata">
+                <source src="videos/pizzaria.mp4" type="video/mp4">
+                <source src="videos/pizzaria.webm" type="video/webm">
+                Seu navegador não suporta vídeo HTML5.
+                <a href="videos/pizzaria.mp4">Baixe o vídeo</a>.
+            </video>
+
+            <h3>Áudio da pizzaria</h3>
+
+            <audio controls preload="none">
+                <source src="audios/ambiente.mp3" type="audio/mpeg">
+                <source src="audios/ambiente.ogg" type="audio/ogg">
+                Seu navegador não suporta áudio HTML5.
+            </audio>
+        </section>
+
+        <!-- GRÁFICO EM CANVAS -->
+        <section id="grafico">
+            <h2>Os sabores favoritos dos nossos clientes</h2>
+
+            <canvas id="grafico-sabores"
+                    width="360" height="220"
+                    role="img"
+                    aria-label="Gráfico ilustrativo de preferência:
+                    Calabresa 40, Mussarela 30 e Portuguesa 20">
+                <p>
+                    Preferências ilustrativas:
+                    Calabresa: 40, Mussarela: 30,
+                    Portuguesa: 20.
+                </p>
+            </canvas>
+
+            <p>
+                Dados ilustrativos para demonstrar o uso do Canvas.
+                Não representam vendas reais.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer id="contato">
+        <h2>Entre em contato</h2>
+
+        <address>
+            Pizzaria Forno de Ouro<br>
+            Endereço: Rua das Pizzas, 100<br>
+            Telefone: (83) 99999-9999<br>
+            E-mail: contato@fornodeouro.com
+        </address>
+
+        <p>Horário de funcionamento: terça a domingo, das 18h às 23h.</p>
+
+        <p>&copy; 2026 Pizzaria Forno de Ouro. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- SCRIPT NECESSÁRIO PARA DESENHAR NO CANVAS -->
+    <script>
+        const canvas = document.getElementById("grafico-sabores");
+        const ctx = canvas.getContext("2d");
+
+        const sabores = [
+            { nome: "Calabresa", valor: 40 },
+            { nome: "Mussarela", valor: 30 },
+            { nome: "Portuguesa", valor: 20 }
+        ];
+
+        function desenharGrafico() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const cores = ["#B22222", "#E89B35", "#4F772D"];
+
+            sabores.forEach((sabor, indice) => {
+                const y = 30 + indice * 60;
+                const largura = sabor.valor * 5;
+
+                ctx.fillStyle = cores[indice];
+                ctx.fillRect(110, y, largura, 25);
+
+                ctx.fillStyle = "#222222";
+                ctx.font = "14px Arial";
+                ctx.fillText(sabor.nome, 10, y + 17);
+                ctx.fillText(String(sabor.valor), 115 + largura, y + 17);
+            });
+        }
+
+        desenharGrafico();
+    </script>
+    <script src="js/main.js" defer></script>
+</body>
+</html>
