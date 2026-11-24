@@ -1,178 +1,152 @@
+const cart = new Map();
+const cartList = document.querySelector("#cart-list");
+const cartCount = document.querySelector("#cart-count");
+const cartTotal = document.querySelector("#cart-total");
+const cartEmpty = document.querySelector("#cart-empty");
+const checkoutForm = document.querySelector("#checkout-form");
+const paymentMethod = document.querySelector("#payment-method");
+const cashChangeGroup = document.querySelector("#cash-change-group");
+const cashChange = document.querySelector("#cash-change");
 
-/*
-  Projeto: Pizzaria Forno de Ouro
-  Arquivo: js/main.js
-
-  Objetivos:
-  - Controlar o menu de navegação.
-  - Organizar os dados das pizzas.
-  - Calcular o valor do pedido.
-  - Validar os dados do formulário.
-  - Mostrar informações no console para testes.
-*/
-
-// ==========================================
-// 1. DADOS DAS PIZZAS
-// ==========================================
-
-const cardapio = [
-  { nome: "Calabresa", preco: 35.00, categoria: "Salgada" },
-  { nome: "Frango com Catupiry", preco: 40.00, categoria: "Salgada" },
-  { nome: "Quatro Queijos", preco: 42.00, categoria: "Salgada" },
-  { nome: "Chocolate", preco: 38.00, categoria: "Doce" }
-];
-
-// Mostra o cardápio organizado no console.
-console.table(cardapio);
-
-// ==========================================
-// 2. MENU DE NAVEGAÇÃO
-// ==========================================
-
-const botaoMenu = document.querySelector(".menu-hamburguer");
-const menuNavegacao = document.querySelector(".nav-links");
-
-if (botaoMenu && menuNavegacao) {
-  botaoMenu.addEventListener("click", function () {
-    const menuAberto = menuNavegacao.classList.toggle("menu-aberto");
-
-    botaoMenu.setAttribute("aria-expanded", String(menuAberto));
-  });
-
-  // Fecha o menu depois que um link é selecionado.
-  const linksMenu = menuNavegacao.querySelectorAll("a");
-
-  for (const link of linksMenu) {
-    link.addEventListener("click", function () {
-      menuNavegacao.classList.remove("menu-aberto");
-      botaoMenu.setAttribute("aria-expanded", "false");
-    });
-  }
-}
-
-// ==========================================
-// 3. FUNÇÃO PARA FORMATAR VALORES EM REAIS
-// ==========================================
-
-function formatarMoeda(valor) {
-  return valor.toLocaleString("pt-BR", {
+const formatPrice = (cents) => new Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency: "BRL"
-  });
+}).format(cents / 100);
+
+function renderCart() {
+    cartList.replaceChildren();
+
+    let itemCount = 0;
+    let total = 0;
+
+    for (const [name, item] of cart) {
+        itemCount += item.quantity;
+        total += item.price * item.quantity;
+
+        const row = document.createElement("li");
+        row.className = "cart-item";
+
+        const description = document.createElement("span");
+        description.className = "cart-item-description";
+        description.textContent = `${name} — ${formatPrice(item.price * item.quantity)}`;
+
+        const controls = document.createElement("div");
+        controls.className = "quantity-controls";
+
+        const decrease = document.createElement("button");
+        decrease.type = "button";
+        decrease.textContent = "−";
+        decrease.setAttribute("aria-label", `Diminuir quantidade de ${name}`);
+        decrease.dataset.cartAction = "decrease";
+        decrease.dataset.product = name;
+
+        const quantity = document.createElement("span");
+        quantity.textContent = String(item.quantity);
+        quantity.setAttribute("aria-label", `Quantidade: ${item.quantity}`);
+
+        const increase = document.createElement("button");
+        increase.type = "button";
+        increase.textContent = "+";
+        increase.setAttribute("aria-label", `Aumentar quantidade de ${name}`);
+        increase.dataset.cartAction = "increase";
+        increase.dataset.product = name;
+
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "remove-item";
+        remove.textContent = "Remover";
+        remove.setAttribute("aria-label", `Remover ${name} do carrinho`);
+        remove.dataset.cartAction = "remove";
+        remove.dataset.product = name;
+
+        controls.append(decrease, quantity, increase, remove);
+        row.append(description, controls);
+        cartList.append(row);
+    }
+
+    cartCount.textContent = String(itemCount);
+    cartTotal.textContent = formatPrice(total);
+    cartEmpty.hidden = itemCount > 0;
+    checkoutForm.querySelector('button[type="submit"]').disabled = itemCount === 0;
 }
 
-// ==========================================
-// 4. FORMULÁRIO E CÁLCULO DO PEDIDO
-// ==========================================
+document.querySelectorAll(".add-to-cart").forEach((button) => {
+    button.addEventListener("click", () => {
+        const { product, price } = button.dataset;
+        const cents = Number(price);
 
-const formulario = document.querySelector("#form-pedido");
+        if (!product || !Number.isSafeInteger(cents) || cents < 0) {
+            console.error("Produto inválido no cardápio.", button);
+            return;
+        }
 
-if (formulario) {
-  formulario.addEventListener("submit", function (evento) {
-    // Impede o envio antes de validar os dados.
-    evento.preventDefault();
+        const existing = cart.get(product);
+        cart.set(product, {
+            price: cents,
+            quantity: existing ? existing.quantity + 1 : 1
+        });
+        renderCart();
+    });
+});
 
-    const campoNome = formulario.querySelector('[name="nome"]');
-    const campoTelefone = formulario.querySelector('[name="telefone"]');
-    const campoPizza = formulario.querySelector('[name="pizza"]');
-    const campoQuantidade = formulario.querySelector('[name="quantidade"]');
-    const campoResumo = document.querySelector("#resumo-pedido");
+cartList.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-cart-action]");
+    if (!button) return;
 
-    // Verifica se os campos necessários existem no HTML.
-    if (
-      !campoNome ||
-      !campoTelefone ||
-      !campoPizza ||
-      !campoQuantidade ||
-      !campoResumo
-    ) {
-      console.error("Confira os campos do formulário no HTML.");
-      return;
+    const item = cart.get(button.dataset.product);
+    if (!item) return;
+
+    if (button.dataset.cartAction === "increase") {
+        item.quantity += 1;
+    } else if (button.dataset.cartAction === "decrease") {
+        item.quantity -= 1;
+        if (item.quantity <= 0) cart.delete(button.dataset.product);
+    } else if (button.dataset.cartAction === "remove") {
+        cart.delete(button.dataset.product);
     }
 
-    // Recebe e trata os dados digitados.
-    const nome = campoNome.value.trim();
-    const telefone = campoTelefone.value.trim();
-    const nomePizza = campoPizza.value;
-    const quantidadeTexto = campoQuantidade.value.trim();
-    const quantidade = Number(quantidadeTexto);
+    renderCart();
+});
 
-    // Validação dos dados de entrada.
-    if (nome === "" || telefone === "" || nomePizza === "") {
-      alert("Preencha seu nome, telefone e escolha uma pizza.");
-      return;
-    }
+paymentMethod.addEventListener("change", () => {
+    const needsChange = paymentMethod.value === "Dinheiro";
+    cashChangeGroup.hidden = !needsChange;
+    cashChange.required = false;
+    if (!needsChange) cashChange.value = "";
+});
 
-    if (
-      quantidadeTexto === "" ||
-      !Number.isInteger(quantidade) ||
-      quantidade < 1 ||
-      quantidade > 20
-    ) {
-      alert("Informe uma quantidade inteira entre 1 e 20.");
-      return;
-    }
+checkoutForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (cart.size === 0) return;
 
-    // Procura a pizza escolhida no cardápio.
-    let pizzaEscolhida = null;
+    const formData = new FormData(checkoutForm);
+    const lines = [...cart].map(([name, item]) =>
+        `• ${item.quantity}x ${name} — ${formatPrice(item.price * item.quantity)}`
+    );
+    const total = [...cart.values()].reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+    );
+    const changeText = formData.get("payment") === "Dinheiro" && formData.get("change")
+        ? `\nTroco para: ${formatPrice(Math.round(Number(formData.get("change")) * 100))}`
+        : "";
+    const notes = String(formData.get("notes") || "").trim();
+    const message = [
+        "Olá! Gostaria de fazer este pedido:",
+        "",
+        ...lines,
+        `\nTotal: ${formatPrice(total)}`,
+        `Nome: ${formData.get("name")}`,
+        `Endereço: ${formData.get("address")}`,
+        `Pagamento: ${formData.get("payment")}${changeText}`,
+        ...(notes ? [`Observações: ${notes}`] : [])
+    ].join("\n");
 
-    for (const pizza of cardapio) {
-      if (pizza.nome === nomePizza) {
-        pizzaEscolhida = pizza;
-        break;
-      }
-    }
+    window.open(
+        `https://wa.me/5583994138238?text=${encodeURIComponent(message)}`,
+        "_blank",
+        "noopener,noreferrer"
+    );
+});
 
-    if (pizzaEscolhida === null) {
-      alert("A pizza escolhida não foi encontrada.");
-      return;
-    }
-
-    // Calcula o valor total.
-    const total = pizzaEscolhida.preco * quantidade;
-
-    // Define uma mensagem conforme o valor do pedido.
-    let mensagem = "";
-
-    if (total >= 100) {
-      mensagem = "Seu pedido tem um valor de R$ 100 ou mais.";
-    } else {
-      mensagem = "Seu pedido foi calculado com sucesso.";
-    }
-
-    // Exibe o resumo do pedido na página.
-    campoResumo.textContent =
-      `Cliente: ${nome}. ` +
-      `Pizza: ${pizzaEscolhida.nome}. ` +
-      `Quantidade: ${quantidade}. ` +
-      `Total: ${formatarMoeda(total)}. ` +
-      mensagem;
-
-    // Mostra os dados para conferência no console.
-    console.table([
-      {
-        cliente: nome,
-        telefone: telefone,
-        pizza: pizzaEscolhida.nome,
-        quantidade: quantidade,
-        total: formatarMoeda(total)
-      }
-    ]);
-
-    alert("Pedido calculado! Confira o resumo na página.");
-  });
-}
-
-// ==========================================
-// 5. TESTE DE MESA DO CÁLCULO
-// ==========================================
-
-// Exemplo: 2 pizzas de Calabresa a R$ 35,00.
-const precoTeste = 35;
-const quantidadeTeste = 2;
-const totalTeste = precoTeste * quantidadeTeste;
-
-console.log("Teste do pedido:");
-console.log(`Preço unitário: ${formatarMoeda(precoTeste)}`);
-console.log(`Quantidade: ${quantidadeTeste}`);
-console.log(`Total: ${formatarMoeda(totalTeste)}`);
+renderCart();

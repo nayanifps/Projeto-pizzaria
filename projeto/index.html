@@ -1,299 +1,478 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Conheça o cardápio da Pizzaria Forno de Ouro e faça seu pedido.">
-    <title>Pizzaria Forno de Ouro</title>
+
+    <meta name="description" content="Forno de Ouro - Pizzas artesanais preparadas com ingredientes frescos, massa especial e muito sabor.">
+    <meta name="keywords" content="pizzaria, pizza artesanal, Forno de Ouro, pizza">
+    <meta name="author" content="Forno de Ouro">
+
+    <title>Forno de Ouro | Pizzaria Artesanal</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
     <!-- CABEÇALHO -->
-    <header>
-        <h1>Pizzaria Forno de Ouro</h1>
-        <p>O sabor que transforma cada momento!</p>
+    <header class="header">
+        <div class="container header-content">
 
-        <!-- Logotipo em SVG -->
-        <svg viewBox="0 0 120 120" width="120" height="120"
-             role="img" aria-labelledby="titulo-logo">
-            <title id="titulo-logo">Logotipo da Pizzaria Forno de Ouro</title>
-            <circle cx="60" cy="60" r="55" fill="#B22222"/>
-            <circle cx="60" cy="60" r="43" fill="#F5C16C"/>
-            <path d="M60 22 L91 85 L29 85 Z" fill="#E89B35"/>
-            <circle cx="55" cy="53" r="5" fill="#B22222"/>
-            <circle cx="68" cy="68" r="5" fill="#B22222"/>
-            <circle cx="48" cy="73" r="4" fill="#B22222"/>
-        </svg>
+            <a href="#inicio" class="logo">
+                <span>🍕</span> Forno de <strong>Ouro</strong>
+            </a>
 
-        <nav aria-label="Navegação principal">
-            <ul>
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="#cardapio">Cardápio</a></li>
-                <li><a href="#promocoes">Promoções</a></li>
-                <li><a href="#pedido">Fazer pedido</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-        </nav>
+            <input type="checkbox" id="menu-toggle">
+
+            <label for="menu-toggle" class="menu-icon" aria-label="Abrir menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <nav class="navbar">
+                <a href="#inicio">Início</a>
+                <a href="#cardapio">Cardápio</a>
+                <a href="#carrinho">Carrinho <span id="cart-count" class="cart-count">0</span></a>
+                <a href="#sobre">Sobre</a>
+                <a href="#contato">Contato</a>
+                <a href="#carrinho" class="nav-button">Peça agora</a>
+            </nav>
+
+        </div>
     </header>
 
-    <!-- CONTEÚDO PRINCIPAL: APENAS UM MAIN -->
     <main>
 
-        <!-- INÍCIO -->
-        <section id="inicio">
-            <h2>Bem-vindo à nossa pizzaria!</h2>
+        <!-- HERO -->
+        <section class="hero" id="inicio">
+            <div class="hero-overlay"></div>
 
-            <p>
-                Trabalhamos com ingredientes selecionados,
-                massas saborosas e muito carinho em cada pizza.
-            </p>
+            <div class="container hero-content">
+                <span class="hero-tag">🍃 Sabor que conquista!</span>
 
-            <p>
-                Escolha seu sabor favorito e faça seu pedido!
-            </p>
+                <h1>Uma experiência<br>de sabor <span>inesquecível!</span></h1>
 
-            <a href="#cardapio">Conheça nosso cardápio</a>
+                <p>
+                    Pizzas artesanais feitas com ingredientes selecionados,
+                    massa fresquinha e muito amor em cada pedaço.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#cardapio" class="btn btn-primary">Ver cardápio</a>
+                    <a href="#carrinho" class="btn btn-outline">Fazer pedido</a>
+                </div>
+            </div>
         </section>
 
         <!-- CARDÁPIO -->
-        <section id="cardapio">
-            <h2>Nosso cardápio</h2>
+        <section class="menu section-padding" id="cardapio">
+            <div class="container">
 
-            <p>Confira algumas das nossas pizzas mais pedidas.</p>
+                <div class="section-title">
+                    <span class="subtitle">FEITAS COM AMOR</span>
+                    <h2>Nosso <span>Cardápio</span></h2>
+                    <p>Escolha sua pizza favorita e aproveite cada pedaço!</p>
+                </div>
 
-            <article>
-                <h3>Pizza de Calabresa</h3>
-                <p>Molho de tomate, mussarela, calabresa e cebola.</p>
-                <p>Preço: R$ 35,00</p>
-            </article>
+                <h3 class="category-title">🍕 Pizzas Tradicionais</h3>
 
-            <article>
-                <h3>Pizza de Mussarela</h3>
-                <p>Molho de tomate, mussarela, tomate e orégano.</p>
-                <p>Preço: R$ 32,00</p>
-            </article>
+                <div class="pizza-grid">
 
-            <article>
-                <h3>Pizza Portuguesa</h3>
-                <p>Presunto, mussarela, ovo, cebola, tomate e azeitona.</p>
-                <p>Preço: R$ 40,00</p>
-            </article>
+                    <article class="pizza-card">
+                        <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600" alt="Pizza de mussarela">
+                        <div class="pizza-info">
+                            <h3>Mussarela</h3>
+                            <p>Molho de tomate, mussarela, tomate e orégano.</p>
+                            <div class="pizza-bottom">
+                                <strong>R$ 39,90</strong>
+                                <button class="add-to-cart" type="button" data-product="Mussarela" data-price="3990">Adicionar</button>
+                            </div>
+                        </div>
+                    </article>
 
-            <article>
-                <h3>Pizza de Frango com Catupiry</h3>
-                <p>Frango desfiado, mussarela e requeijão cremoso.</p>
-                <p>Preço: R$ 42,00</p>
-            </article>
+                    <article class="pizza-card">
+                        <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=600" alt="Pizza de calabresa">
+                        <div class="pizza-info">
+                            <h3>Calabresa</h3>
+                            <p>Calabresa fatiada, cebola, mussarela e orégano.</p>
+                            <div class="pizza-bottom">
+                                <strong>R$ 42,90</strong>
+                                <button class="add-to-cart" type="button" data-product="Calabresa" data-price="4290">Adicionar</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pizza-card">
+                        <img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=600" alt="Pizza de frango com catupiry">
+                        <div class="pizza-info">
+                            <h3>Frango com Catupiry</h3>
+                            <p>Frango desfiado, catupiry, mussarela e milho.</p>
+                            <div class="pizza-bottom">
+                                <strong>R$ 46,90</strong>
+                                <button class="add-to-cart" type="button" data-product="Frango com Catupiry" data-price="4690">Adicionar</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pizza-card">
+                        <img src="https://images.unsplash.com/photo-1604382355076-af4b0eb60143?w=600" alt="Pizza portuguesa">
+                        <div class="pizza-info">
+                            <h3>Portuguesa</h3>
+                            <p>Presunto, ovos, cebola, azeitona, mussarela e tomate.</p>
+                            <div class="pizza-bottom">
+                                <strong>R$ 45,90</strong>
+                                <button class="add-to-cart" type="button" data-product="Portuguesa" data-price="4590">Adicionar</button>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+                <h3 class="category-title">⭐ Pizzas Especiais</h3>
+
+                <div class="pizza-grid">
+
+                    <article class="pizza-card">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600" alt="Pizza quatro queijos">
+                        <div class="pizza-info">
+                            <h3>Quatro Queijos</h3>
+                            <p>Mussarela, parmesão, provolone e gorgonzola.</p>
+                            <div class="pizza-bottom">
+                                <strong>R$ 49,90</strong>
+                                <button class="add-to-cart" type="button" data-product="Quatro Queijos" data-price="4990">Adicionar</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pizza-card">
+                        <img src="https://images.unsplash.com/photo-1595854341625-f33ee10dbf94?w=600" alt="Pizza de bacon">
+                        <div class="pizza-info">
+                            <h3>Bacon Especial</h3>
+                            <p>Bacon crocante, mussarela, cheddar e cebola.</p>
+                            <div class="pizza-bottom">
+                                <strong>R$ 51,90</strong>
+                                <button class="add-to-cart" type="button" data-product="Bacon Especial" data-price="5190">Adicionar</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pizza-card">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600" alt="Pizza italiana">
+                        <div class="pizza-info">
+                            <h3>Italiana</h3>
+                            <p>Tomate cereja, manjericão, mussarela e parmesão.</p>
+                            <div class="pizza-bottom">
+                                <strong>R$ 53,90</strong>
+                                <button class="add-to-cart" type="button" data-product="Italiana" data-price="5390">Adicionar</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pizza-card">
+                        <img src="https://images.unsplash.com/photo-1579751626657-72bc17010498?w=600" alt="Pizza de carne de sol">
+                        <div class="pizza-info">
+                            <h3>Carne de Sol</h3>
+                            <p>Carne de sol desfiada, queijo coalho e cebola roxa.</p>
+                            <div class="pizza-bottom">
+                                <strong>R$ 56,90</strong>
+                                <button class="add-to-cart" type="button" data-product="Carne de Sol" data-price="5690">Adicionar</button>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- BEBIDAS -->
+                <h3 class="category-title">🥤 Bebidas</h3>
+
+                <div class="extras-grid">
+                    <article class="extra-card">
+                        <span>🥤</span>
+                        <h3>Refrigerante</h3>
+                        <p>Lata 350ml</p>
+                        <strong>R$ 6,00</strong>
+                        <button class="add-to-cart" type="button" data-product="Refrigerante (lata 350ml)" data-price="600">Adicionar</button>
+                    </article>
+
+                    <article class="extra-card">
+                        <span>🧃</span>
+                        <h3>Suco Natural</h3>
+                        <p>Sabores variados</p>
+                        <strong>R$ 8,00</strong>
+                        <button class="add-to-cart" type="button" data-product="Suco Natural" data-price="800">Adicionar</button>
+                    </article>
+
+                    <article class="extra-card">
+                        <span>💧</span>
+                        <h3>Água Mineral</h3>
+                        <p>Garrafa 500ml</p>
+                        <strong>R$ 4,00</strong>
+                        <button class="add-to-cart" type="button" data-product="Água Mineral (500ml)" data-price="400">Adicionar</button>
+                    </article>
+                </div>
+
+                <!-- SOBREMESAS -->
+                <h3 class="category-title">🍫 Sobremesas</h3>
+
+                <div class="extras-grid">
+                    <article class="extra-card">
+                        <span>🍫</span>
+                        <h3>Pizza de Chocolate</h3>
+                        <p>Chocolate cremoso e granulado.</p>
+                        <strong>R$ 29,90</strong>
+                        <button class="add-to-cart" type="button" data-product="Pizza de Chocolate" data-price="2990">Adicionar</button>
+                    </article>
+
+                    <article class="extra-card">
+                        <span>🍓</span>
+                        <h3>Pizza de Morango</h3>
+                        <p>Chocolate branco e morangos frescos.</p>
+                        <strong>R$ 32,90</strong>
+                        <button class="add-to-cart" type="button" data-product="Pizza de Morango" data-price="3290">Adicionar</button>
+                    </article>
+
+                    <article class="extra-card">
+                        <span>🍮</span>
+                        <h3>Pudim</h3>
+                        <p>Tradicional com calda de caramelo.</p>
+                        <strong>R$ 9,90</strong>
+                        <button class="add-to-cart" type="button" data-product="Pudim" data-price="990">Adicionar</button>
+                    </article>
+                </div>
+
+                <section class="cart section-padding" id="carrinho" aria-labelledby="cart-title">
+                    <div class="section-title">
+                        <span class="subtitle">SEU PEDIDO</span>
+                        <h2 id="cart-title">Meu <span>carrinho</span></h2>
+                        <p>Confira os itens e escolha como deseja pagar.</p>
+                    </div>
+
+                    <div class="cart-content">
+                        <div class="cart-items" aria-live="polite">
+                            <p id="cart-empty">Seu carrinho está vazio. Adicione seus favoritos pelo cardápio!</p>
+                            <ul id="cart-list"></ul>
+                            <p class="cart-total">Total: <strong id="cart-total">R$ 0,00</strong></p>
+                        </div>
+
+                        <form id="checkout-form" class="checkout-form">
+                            <label for="customer-name">Seu nome</label>
+                            <input id="customer-name" name="name" type="text" autocomplete="name" required>
+
+                            <label for="customer-address">Endereço de entrega</label>
+                            <textarea id="customer-address" name="address" rows="3" autocomplete="street-address" required></textarea>
+
+                            <label for="order-notes">Observações do pedido (opcional)</label>
+                            <textarea id="order-notes" name="notes" rows="3" maxlength="500" placeholder="Ex.: sem cebola na pizza de calabresa."></textarea>
+
+                            <label for="payment-method">Forma de pagamento</label>
+                            <select id="payment-method" name="payment" required>
+                                <option value="">Selecione</option>
+                                <option value="Pix">Pix</option>
+                                <option value="Cartão de crédito">Cartão de crédito</option>
+                                <option value="Cartão de débito">Cartão de débito</option>
+                                <option value="Dinheiro">Dinheiro</option>
+                            </select>
+
+                            <div id="cash-change-group" hidden>
+                                <label for="cash-change">Precisa de troco para quanto? (opcional)</label>
+                                <input id="cash-change" name="change" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Ex.: 50,00">
+                            </div>
+
+                            <p class="payment-note">O pagamento será combinado com a pizzaria pelo WhatsApp. Nenhum dado de cartão é solicitado neste site.</p>
+                            <button class="btn btn-primary checkout-button" type="submit">Enviar pedido pelo WhatsApp</button>
+                        </form>
+                    </div>
+                </section>
+
+            </div>
         </section>
 
-        <!-- PROMOÇÕES -->
-        <section id="promocoes">
-            <h2>Promoções da casa</h2>
+        <!-- SOBRE -->
+        <section class="about section-padding" id="sobre">
+            <div class="container about-content">
 
-            <article>
-                <h3>Combo Família</h3>
-                <p>Uma pizza grande e um refrigerante de 2 litros.</p>
-                <p>Preço promocional: R$ 55,00</p>
-            </article>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1579751626657-72bc17010498?w=900" alt="Pizza artesanal preparada no forno">
+                </div>
 
-            <article>
-                <h3>Quarta-feira da Pizza</h3>
-                <p>Consulte nossos sabores participantes e aproveite!</p>
-            </article>
+                <div class="about-text">
+                    <span class="subtitle">NOSSA HISTÓRIA</span>
+                    <h2>Mais que pizza,<br>uma paixão pelo <span>sabor!</span></h2>
+
+                    <p>
+                        A Forno de Ouro nasceu da paixão pela verdadeira pizza artesanal.
+                        Nosso objetivo é proporcionar momentos especiais através de sabores
+                        únicos e receitas preparadas com carinho.
+                    </p>
+
+                    <p>
+                        Cada pizza é preparada com ingredientes selecionados, massa artesanal
+                        e todo o cuidado que você merece.
+                    </p>
+
+                    <div class="features">
+                        <div class="feature">
+                            <span>🍞</span>
+                            <div>
+                                <h4>Massa artesanal</h4>
+                                <p>Preparada com dedicação.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature">
+                            <span>🔥</span>
+                            <div>
+                                <h4>Forno a lenha</h4>
+                                <p>Mais sabor em cada fatia.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature">
+                            <span>🍅</span>
+                            <div>
+                                <h4>Ingredientes frescos</h4>
+                                <p>Qualidade em cada detalhe.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </section>
 
-        <!-- FORMULÁRIO DE PEDIDO -->
-        <section id="pedido">
-            <h2>Faça seu pedido</h2>
+        <!-- DEPOIMENTOS -->
+        <section class="testimonials section-padding">
+            <div class="container">
 
-            <p>Preencha os dados abaixo para montar seu pedido.</p>
+                <div class="section-title">
+                    <span class="subtitle">QUEM PROVA, APROVA!</span>
+                    <h2>O que dizem nossos <span>clientes</span></h2>
+                </div>
 
-            <form action="#" method="get">
+                <div class="testimonial-grid">
 
-                <fieldset>
-                    <legend>Dados do cliente</legend>
+                    <article class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"Uma das melhores pizzas que já comi! Massa perfeita e ingredientes de qualidade."</p>
+                        <h3>Mariana Silva</h3>
+                        <span>Cliente</span>
+                    </article>
 
-                    <label for="nome">Nome completo:</label>
-                    <input type="text" id="nome" name="nome"
-                           minlength="3" maxlength="80"
-                           autocomplete="name" required>
+                    <article class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"Atendimento excelente e pizza deliciosa. Sempre que posso, faço meu pedido!"</p>
+                        <h3>Pedro Henrique</h3>
+                        <span>Cliente</span>
+                    </article>
 
-                    <label for="telefone">Telefone:</label>
-                    <input type="tel" id="telefone" name="telefone"
-                           placeholder="(83) 99999-9999"
-                           pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}"
-                           autocomplete="tel" required>
+                    <article class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"O sabor é maravilhoso! A pizza de carne de sol é simplesmente incrível."</p>
+                        <h3>Ana Beatriz</h3>
+                        <span>Cliente</span>
+                    </article>
 
-                    <label for="email">E-mail:</label>
-                    <input type="email" id="email" name="email"
-                           autocomplete="email" required>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Detalhes do pedido</legend>
-
-                    <label for="sabor">Escolha o sabor:</label>
-                    <select id="sabor" name="sabor" required>
-                        <option value="">Selecione um sabor</option>
-                        <option value="calabresa">Calabresa</option>
-                        <option value="mussarela">Mussarela</option>
-                        <option value="portuguesa">Portuguesa</option>
-                        <option value="frango-catupiry">Frango com Catupiry</option>
-                    </select>
-
-                    <label for="tamanho">Tamanho da pizza:</label>
-                    <select id="tamanho" name="tamanho" required>
-                        <option value="">Selecione o tamanho</option>
-                        <option value="pequena">Pequena</option>
-                        <option value="media">Média</option>
-                        <option value="grande">Grande</option>
-                    </select>
-
-                    <label for="quantidade">Quantidade:</label>
-                    <input type="number" id="quantidade"
-                           name="quantidade" min="1" max="20"
-                           value="1" required>
-
-                    <p>Como deseja receber seu pedido?</p>
-
-                    <input type="radio" id="entrega" name="recebimento"
-                           value="entrega" required>
-                    <label for="entrega">Entrega em casa</label>
-
-                    <input type="radio" id="retirada" name="recebimento"
-                           value="retirada">
-                    <label for="retirada">Retirada no local</label>
-
-                    <label for="endereco">Endereço de entrega:</label>
-                    <input type="text" id="endereco" name="endereco"
-                           autocomplete="street-address">
-
-                    <label for="observacoes">Observações do pedido:</label>
-                    <textarea id="observacoes" name="observacoes"
-                              rows="4" maxlength="300"
-                              placeholder="Ex.: retirar cebola, cortar em oito fatias..."></textarea>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Confirmação</legend>
-
-                    <input type="checkbox" id="termos" name="termos"
-                           value="aceito" required>
-                    <label for="termos">
-                        Confirmo que os dados do pedido estão corretos.
-                    </label>
-                </fieldset>
-
-                <button type="submit">Enviar pedido</button>
-                <button type="reset">Limpar formulário</button>
-
-            </form>
+                </div>
+            </div>
         </section>
 
-        <!-- CONTEÚDO RELACIONADO -->
-        <aside>
-            <h2>Dica do pizzaiolo</h2>
-            <p>Experimente nossa pizza de calabresa com orégano!</p>
-        </aside>
+        <!-- CONTATO -->
+        <section class="contact section-padding" id="contato">
+            <div class="container">
 
-        <!-- MULTIMÍDIA -->
-        <section id="multimidia">
-            <h2>Conheça nossa pizzaria</h2>
+                <div class="section-title">
+                    <span class="subtitle">FALE COM A GENTE</span>
+                    <h2>Faça seu <span>pedido!</span></h2>
+                    <p>Estamos esperando por você.</p>
+                </div>
 
-            <h3>Vídeo de apresentação</h3>
+                <div class="contact-content">
 
-            <video controls width="480" preload="metadata">
-                <source src="videos/pizzaria.mp4" type="video/mp4">
-                <source src="videos/pizzaria.webm" type="video/webm">
-                Seu navegador não suporta vídeo HTML5.
-                <a href="videos/pizzaria.mp4">Baixe o vídeo</a>.
-            </video>
+                    <div class="contact-info">
 
-            <h3>Áudio da pizzaria</h3>
+                        <div class="contact-item">
+                            <span>📍</span>
+                            <div>
+                                <h3>Endereço</h3>
+                                <p>João Pessoa - PB</p>
+                            </div>
+                        </div>
 
-            <audio controls preload="none">
-                <source src="audios/ambiente.mp3" type="audio/mpeg">
-                <source src="audios/ambiente.ogg" type="audio/ogg">
-                Seu navegador não suporta áudio HTML5.
-            </audio>
-        </section>
+                        <div class="contact-item">
+                            <span>📞</span>
+                            <div>
+                                <h3>Telefone</h3>
+                                <p>(83) 99999-9999</p>
+                            </div>
+                        </div>
 
-        <!-- GRÁFICO EM CANVAS -->
-        <section id="grafico">
-            <h2>Os sabores favoritos dos nossos clientes</h2>
+                        <div class="contact-item">
+                            <span>🕒</span>
+                            <div>
+                                <h3>Funcionamento</h3>
+                                <p>Terça a domingo</p>
+                                <p>18h às 23h</p>
+                            </div>
+                        </div>
 
-            <canvas id="grafico-sabores"
-                    width="360" height="220"
-                    role="img"
-                    aria-label="Gráfico ilustrativo de preferência:
-                    Calabresa 40, Mussarela 30 e Portuguesa 20">
-                <p>
-                    Preferências ilustrativas:
-                    Calabresa: 40, Mussarela: 30,
-                    Portuguesa: 20.
-                </p>
-            </canvas>
+                        <a href="https://wa.me/5583994138238" target="_blank" rel="noopener noreferrer" class="btn btn-primary whatsapp">
+                            Conversar pelo WhatsApp
+                        </a>
 
-            <p>
-                Dados ilustrativos para demonstrar o uso do Canvas.
-                Não representam vendas reais.
-            </p>
+                    </div>
+
+                    <div class="order-guide">
+                        <span class="order-guide-icon" aria-hidden="true">🍕</span>
+                        <h3>Seu pedido, do seu jeito</h3>
+                        <p>É fácil pedir suas pizzas favoritas:</p>
+                        <ol>
+                            <li>Escolha os produtos no cardápio e adicione ao carrinho.</li>
+                            <li>Informe seu nome e endereço de entrega.</li>
+                            <li>Selecione Pix, cartão de crédito ou débito, ou dinheiro.</li>
+                            <li>Envie o pedido pelo WhatsApp para confirmar com a gente.</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
         </section>
 
     </main>
 
     <!-- RODAPÉ -->
-    <footer id="contato">
-        <h2>Entre em contato</h2>
+    <footer class="footer">
+        <div class="container footer-content">
 
-        <address>
-            Pizzaria Forno de Ouro<br>
-            Endereço: Rua das Pizzas, 100<br>
-            Telefone: (83) 99999-9999<br>
-            E-mail: contato@fornodeouro.com
-        </address>
+            <div class="footer-brand">
+                <a href="#inicio" class="logo">
+                    🍕 Forno de <strong>Ouro</strong>
+                </a>
+                <p>O verdadeiro sabor da pizza artesanal!</p>
+            </div>
 
-        <p>Horário de funcionamento: terça a domingo, das 18h às 23h.</p>
+            <div class="social-links">
+                <h3>Siga nossas redes</h3>
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a>
+                <a href="https://wa.me/5583994138238" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            </div>
 
-        <p>&copy; 2026 Pizzaria Forno de Ouro. Todos os direitos reservados.</p>
+        </div>
+
+        <div class="copyright">
+            <p>© 2026 Forno de Ouro. Todos os direitos reservados.</p>
+            <p>Feito com ❤️ e muito sabor!</p>
+        </div>
     </footer>
 
-    <!-- SCRIPT NECESSÁRIO PARA DESENHAR NO CANVAS -->
-    <script>
-        const canvas = document.getElementById("grafico-sabores");
-        const ctx = canvas.getContext("2d");
-
-        const sabores = [
-            { nome: "Calabresa", valor: 40 },
-            { nome: "Mussarela", valor: 30 },
-            { nome: "Portuguesa", valor: 20 }
-        ];
-
-        function desenharGrafico() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            const cores = ["#B22222", "#E89B35", "#4F772D"];
-
-            sabores.forEach((sabor, indice) => {
-                const y = 30 + indice * 60;
-                const largura = sabor.valor * 5;
-
-                ctx.fillStyle = cores[indice];
-                ctx.fillRect(110, y, largura, 25);
-
-                ctx.fillStyle = "#222222";
-                ctx.font = "14px Arial";
-                ctx.fillText(sabor.nome, 10, y + 17);
-                ctx.fillText(String(sabor.valor), 115 + largura, y + 17);
-            });
-        }
-
-        desenharGrafico();
-    </script>
-    <script src="js/main.js" defer></script>
+    <script src="main.js" defer></script>
 </body>
 </html>
